@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import LandingPage from './components/LandingPage';
 import MemberDashboard from './components/MemberDashboard';
+import PerformanceDashboard from './components/PerformanceDashboard';
 import ErrorScreen from './components/ui/ErrorScreen';
 import LoadingScreen from './components/ui/LoadingScreen';
 import { DASHBOARD_SOURCES, type DashboardYearKey } from './config/dashboardYears';
 import { useDashboardData } from './hooks/useDashboardData';
 
-function App() {
+function DashboardApp() {
   const [selectedDashboardKey, setSelectedDashboardKey] = useState<DashboardYearKey | null>(null);
 
   const {
@@ -66,6 +67,16 @@ function App() {
       onChangeDashboardYear={handleChangeDashboardYear}
     />
   );
+}
+
+function App() {
+  const normalizedPath = window.location.pathname.replace(/\/+$/, '') || '/';
+
+  if (normalizedPath === '/performance-dashboard') {
+    return <PerformanceDashboard />;
+  }
+
+  return <DashboardApp />;
 }
 
 export default App;
