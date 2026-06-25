@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import { Bell, ChevronRight, Menu, Search } from 'lucide-react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Bell, ChevronRight, Menu, Search, Shield } from 'lucide-react';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import AccountFooterPanel from '../auth/AccountFooterPanel';
+import { useAuth } from '../../context/AuthContext';
+import { useMemberProfile } from '../../hooks/useMemberProfile';
+import { LOGIN_SIGNED_OUT_STATE } from '../../lib/authNavigation';
 import { MEMBER_PORTAL_BASE, memberPortalNav } from './navItems';
+import '../../styles/auth.css';
 import '../../styles/performance-dashboard.css';
 
 function useActiveLabel() {
@@ -15,10 +20,63 @@ function useActiveLabel() {
   return match?.label ?? memberPortalNav[0].label;
 }
 
+function ProfileAvatar() {
+  return (
+    <svg className="performance-profile-avatar" viewBox="0 0 42 42" aria-hidden="true">
+      <defs>
+        <clipPath id="performance-profile-clip">
+          <circle cx="21" cy="21" r="21" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#performance-profile-clip)">
+        <rect width="42" height="42" fill="#b6bac3" />
+        <circle cx="21" cy="16" r="7.5" fill="#fff" />
+        <circle cx="21" cy="38" r="14" fill="#fff" />
+      </g>
+    </svg>
+  );
+}
+
 export default function MemberPortalLayout() {
+  const { isAdmin, signOut } = useAuth();
+  const { displayName, email, roleLabel, initials } = useMemberProfile();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
   const closeMenu = () => setIsMenuOpen(false);
   const activeLabel = useActiveLabel();
+
+  useEffect(() => {
+    if (!isProfileMenuOpen) return;
+
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!profileMenuRef.current?.contains(event.target as Node)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handlePointerDown);
+    window.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [isProfileMenuOpen]);
+
+  const handleSignOut = () => {
+    setIsProfileMenuOpen(false);
+    void signOut().then(() => {
+      navigate('/login', { replace: true, state: LOGIN_SIGNED_OUT_STATE });
+    });
+  };
 
   return (
     <div className="performance-shell">
@@ -32,23 +90,12 @@ export default function MemberPortalLayout() {
         </div>
 
         <div className="performance-member">
-          <div className="performance-avatar" aria-hidden="true">
-            <svg viewBox="0 0 42 42">
-              <defs>
-                <clipPath id="performance-member-clip">
-                  <circle cx="21" cy="21" r="21" />
-                </clipPath>
-              </defs>
-              <g clipPath="url(#performance-member-clip)">
-                <rect width="42" height="42" fill="#d9d9d9" />
-                <circle cx="21" cy="16" r="7.5" fill="#9aa0a8" />
-                <circle cx="21" cy="38" r="14" fill="#9aa0a8" />
-              </g>
-            </svg>
+          <div className="performance-avatar performance-avatar-initials" aria-hidden="true">
+            {initials}
           </div>
           <div>
-            <strong>Dulain Gunawardhana</strong>
-            <span>Member • President</span>
+            <strong>{displayName}</strong>
+            <span>{roleLabel}</span>
           </div>
         </div>
 
@@ -70,13 +117,17 @@ export default function MemberPortalLayout() {
         <Link className="performance-dues-mini" to={`${MEMBER_PORTAL_BASE}/monthly-fee-portal`} onClick={closeMenu}>
           <div>
             <strong>Monthly Fee Dues</strong>
-            <span><i /> Paid • June 2026</span>
+            <span>
+              <i /> Paid • June 2026
+            </span>
           </div>
           <ChevronRight size={24} />
         </Link>
       </aside>
 
-      {isMenuOpen && <button type="button" className="performance-backdrop" onClick={closeMenu} aria-label="Close menu" />}
+      {isMenuOpen ? (
+        <button type="button" className="performance-backdrop" onClick={closeMenu} aria-label="Close menu" />
+      ) : null}
 
       <div className="performance-page">
         <header className="performance-topbar">
@@ -102,20 +153,50 @@ export default function MemberPortalLayout() {
               <Bell size={22} strokeWidth={2.4} />
               <span />
             </button>
-            <button type="button" className="performance-profile-button" aria-label="Open profile">
-              <svg className="performance-profile-avatar" viewBox="0 0 42 42" aria-hidden="true">
-                <defs>
-                  <clipPath id="performance-profile-clip">
-                    <circle cx="21" cy="21" r="21" />
-                  </clipPath>
-                </defs>
-                <g clipPath="url(#performance-profile-clip)">
-                  <rect width="42" height="42" fill="#b6bac3" />
-                  <circle cx="21" cy="16" r="7.5" fill="#fff" />
-                  <circle cx="21" cy="38" r="14" fill="#fff" />
-                </g>
-              </svg>
-            </button>
+
+            <div className="performance-profile-menu-wrap" ref={profileMenuRef}>
+              <button
+                type="button"
+                className={`performance-profile-button${isProfileMenuOpen ? ' is-open' : ''}`}
+                aria-label="Open account menu"
+                aria-expanded={isProfileMenuOpen}
+                aria-haspopup="menu"
+                onClick={() => setIsProfileMenuOpen((open) => !open)}
+              >
+                <ProfileAvatar />
+              </button>
+
+              {isProfileMenuOpen ? (
+                <div className="performance-profile-menu" role="menu">
+                  <div className="performance-profile-menu-header">
+                    <strong>{displayName}</strong>
+                    <span>{roleLabel}</span>
+                  </div>
+
+                  {isAdmin ? (
+                    <div className="performance-profile-menu-actions">
+                      <Link
+                        className="performance-profile-menu-admin"
+                        to="/admin"
+                        role="menuitem"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                      >
+                        <Shield size={15} aria-hidden="true" />
+                        Admin Panel
+                      </Link>
+                    </div>
+                  ) : null}
+
+                  <AccountFooterPanel
+                    className="performance-profile-menu-account"
+                    email={email}
+                    displayName={displayName}
+                    variant="on-light"
+                    onSignOut={handleSignOut}
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
         </header>
 

@@ -15,13 +15,13 @@ export interface MemberPortalNavItem {
   icon: LucideIcon;
   /** Absolute route path used for navigation. */
   path: string;
-  /** Path segment relative to /member-portal ('' for the index route). */
+  /** Path segment relative to /member ('' for the index route). */
   slug: string;
   /** True for the index route so its NavLink only matches exactly. */
   end?: boolean;
 }
 
-export const MEMBER_PORTAL_BASE = '/member-portal';
+export const MEMBER_PORTAL_BASE = '/member';
 
 export const memberPortalNav: MemberPortalNavItem[] = [
   { label: 'Performance Dashboard', icon: Gauge, path: MEMBER_PORTAL_BASE, slug: '', end: true },

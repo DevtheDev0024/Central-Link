@@ -100,6 +100,54 @@
   height: 100%;
 }
 
+.performance-avatar-initials {
+  display: grid;
+  place-items: center;
+  background: #f3d96d;
+  color: #004165;
+  font-family: 'GothamCondensed-Bold', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.performance-profile-button .performance-avatar-initials {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 0.82rem;
+}
+
+.performance-sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 16px 12px;
+}
+
+.performance-sidebar-action {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  padding: 0 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.performance-sidebar-action:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
 .performance-nav {
   display: flex;
   flex-direction: column;
@@ -331,6 +379,87 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.performance-profile-button.is-open {
+  box-shadow: 0 0 0 2px rgba(0, 65, 101, 0.28);
+}
+
+.performance-profile-menu-wrap {
+  position: relative;
+}
+
+.performance-profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 70;
+  width: min(18rem, calc(100vw - 2rem));
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(16, 35, 56, 0.14);
+}
+
+.performance-profile-menu-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.performance-profile-menu-header strong {
+  color: #004165;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.performance-profile-menu-header span {
+  color: #667085;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.performance-profile-menu-email {
+  color: #8b9298 !important;
+  font-size: 0.72rem !important;
+}
+
+.performance-profile-menu-actions {
+  padding: 12px 16px 0;
+}
+
+.performance-profile-menu-account {
+  margin: 12px;
+}
+
+.performance-profile-menu-admin {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #004165;
+  padding: 0.55rem 1rem;
+  background: transparent;
+  color: #004165;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.performance-profile-menu-admin:hover {
+  background: #004165;
+  color: #fff;
 }
 
 .performance-menu-button,

@@ -1,15 +1,18 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Award,
   BarChart3,
   Calendar,
   CheckCircle,
-  LogOut,
+  Gauge,
   Mail,
   Settings,
   Users,
 } from 'lucide-react';
+import AccountFooterPanel from '../auth/AccountFooterPanel';
 import { useAuth } from '../../context/AuthContext';
+import { LOGIN_SIGNED_OUT_STATE } from '../../lib/authNavigation';
+import '../../styles/auth.css';
 import '../../styles/admin.css';
 
 const NAV_ITEMS = [
@@ -28,7 +31,14 @@ type AdminDashboardLayoutProps = {
 
 export default function AdminDashboardLayout({ children }: AdminDashboardLayoutProps) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { user, signOut } = useAuth();
+
+  const handleSignOut = () => {
+    void signOut().then(() => {
+      navigate('/login', { replace: true, state: LOGIN_SIGNED_OUT_STATE });
+    });
+  };
 
   return (
     <div className="admin-dashboard">
@@ -68,19 +78,18 @@ export default function AdminDashboardLayout({ children }: AdminDashboardLayoutP
           })}
         </nav>
 
-        <div className="admin-sidebar-footer">
-          <span>{user?.email}</span>
-          <button
-            type="button"
-            className="admin-sidebar-signout"
-            onClick={() => {
-              void signOut();
-            }}
-          >
-            <LogOut size={14} aria-hidden="true" />
-            Sign out
-          </button>
-        </div>
+        <Link to="/member" className="admin-sidebar-member-link">
+          <Gauge size={18} aria-hidden="true" />
+          Member Dashboard
+        </Link>
+
+        <AccountFooterPanel
+          className="admin-sidebar-footer"
+          email={user?.email}
+          displayName={user?.displayName}
+          variant="on-dark"
+          onSignOut={handleSignOut}
+        />
       </aside>
 
       <main className="admin-main">{children}</main>

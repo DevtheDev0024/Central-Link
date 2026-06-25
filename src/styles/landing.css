@@ -4,6 +4,7 @@
   --landing-gold-light: #f4dc8a;
   --landing-navy: #1a2f5a;
   --landing-navy-dark: #0f1d38;
+  --landing-nav-blue: #004165;
   --landing-maroon: #800020;
   --landing-display: 'MyriadPro-Light', Arial, Helvetica, sans-serif;
   --landing-body: 'MyriadPro-Light', Arial, Helvetica, sans-serif;
@@ -11,6 +12,7 @@
   --landing-hero-overlay-opacity: 1;
   --landing-ribbon-offset: 0vw;
   --landing-closing-opacity: 0;
+  --landing-nav-progress: 0;
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
@@ -58,19 +60,36 @@
 }
 
 .landing-nav {
-  position: relative;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, calc(0.18 * (1 - var(--landing-nav-progress))));
+  background: rgba(0, 65, 101, var(--landing-nav-progress));
+  box-shadow: 0 4px 24px rgba(0, 0, 0, calc(0.18 * var(--landing-nav-progress)));
+}
+
+.landing-nav-inner {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2rem);
   width: min(100% - 4rem, 90rem);
   margin: 0 auto;
   padding: 1.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.landing-nav-leading {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 2.8vw, 2.75rem);
+  min-width: 0;
 }
 
 .landing-wordmark {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 0.8rem;
   width: fit-content;
@@ -79,36 +98,82 @@
   font-size: clamp(1.2rem, 1.65vw, 1.5rem);
   font-weight: 300;
   letter-spacing: 0.035em;
-  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 3px 20px rgba(0, 0, 0, calc(0.45 * (1 - var(--landing-nav-progress))));
 }
 
 .landing-wordmark img {
   width: clamp(2.5rem, 3.5vw, 3.25rem);
   height: clamp(2.5rem, 3.5vw, 3.25rem);
   object-fit: contain;
-  filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.32));
+  filter: drop-shadow(0 5px 14px rgba(0, 0, 0, calc(0.32 * (1 - var(--landing-nav-progress)))));
 }
 
-.landing-slogan {
+.landing-nav-links {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.35rem;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.82);
-  font-family: 'GothamCondensed-Bold', sans-serif;
-  font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-  font-weight: 700;
-  font-style: italic;
-  font-synthesis: style;
-  letter-spacing: 0.025em;
-  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.5);
+  gap: clamp(0.9rem, 1.45vw, 1.5rem);
 }
 
-.landing-slogan span {
-  color: var(--landing-gold-light);
-  font-size: 1.45em;
-  font-style: normal;
-  line-height: 0.6;
+.landing-nav-links a {
+  position: relative;
+  padding-bottom: 0.2rem;
+  color: #fff;
+  font-family: var(--landing-body);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1rem;
+  text-decoration: none;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, calc(0.35 * (1 - var(--landing-nav-progress))));
+  white-space: nowrap;
+}
+
+.landing-nav-links a::after {
+  position: absolute;
+  right: -0.18rem;
+  bottom: 0;
+  left: -0.18rem;
+  height: 1px;
+  background: var(--landing-gold);
+  content: '';
+  opacity: 0;
+}
+
+.landing-nav-links a.is-active::after {
+  opacity: 1;
+}
+
+.landing-nav-links a:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
+}
+
+.landing-nav-signin {
+  flex-shrink: 0;
+  border: 1px solid #fff;
+  padding: 0.4rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--landing-body);
+  font-size: 0.6875rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  line-height: 1rem;
+  text-decoration: none;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, calc(0.35 * (1 - var(--landing-nav-progress))));
+  text-transform: uppercase;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.landing-nav-signin:hover {
+  background: #fff;
+  color: var(--landing-nav-blue);
+}
+
+.landing-nav-signin:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
 }
 
 .landing-year-button:focus-visible {
@@ -126,7 +191,7 @@
   width: min(100% - 4rem, 90rem);
   min-height: calc(100vh - 6.6rem);
   margin: 0 auto;
-  padding: clamp(5rem, 10vh, 8rem) 0;
+  padding: calc(clamp(5rem, 10vh, 8rem) + 5.5rem) 0 clamp(5rem, 10vh, 8rem);
 }
 
 .landing-hero {
@@ -522,6 +587,18 @@
 }
 
 @media (max-width: 1024px) {
+  .landing-nav-inner {
+    width: min(100% - 2.5rem, 90rem);
+  }
+
+  .landing-nav-leading {
+    gap: 1.25rem;
+  }
+
+  .landing-nav-links {
+    gap: 0.75rem;
+  }
+
   .landing-main {
     grid-template-columns: 1fr;
     align-items: start;
@@ -544,15 +621,14 @@
 }
 
 @media (max-width: 720px) {
-  .landing-nav,
+  .landing-nav-inner,
   .landing-main,
   .landing-story,
   .landing-footer {
     width: min(100% - 1.5rem, 90rem);
   }
 
-  .landing-nav {
-    grid-template-columns: minmax(0, 1fr) auto;
+  .landing-nav-inner {
     padding: 0.9rem 0;
   }
 
@@ -568,7 +644,12 @@
     height: 2.25rem;
   }
 
-  .landing-slogan {
+  .landing-nav-leading {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .landing-nav-links {
     display: none;
   }
 

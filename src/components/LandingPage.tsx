@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import '../styles/landing.css';
 
@@ -9,7 +10,6 @@ type DashboardSource = {
 
 type LandingPageProps<DashboardKey extends string> = {
   dashboardOptions: Array<[DashboardKey, DashboardSource]>;
-  onSelectDashboard: (dashboardKey: DashboardKey) => void;
 };
 
 const ribbonImages = [
@@ -27,6 +27,15 @@ const ribbonImages = [
   { src: '/pictures/573882467_1451611673632222_5772695783812924339_n.jpg', position: 'center center' },
 ];
 
+const NAV_LINKS = [
+  { label: 'Home', href: '#top' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'About Central Link', href: '#about' },
+  { label: 'Our Achievements', href: '#achievements' },
+  { label: 'Exco', href: '#exco' },
+  { label: 'Contact Us', href: '#contact' },
+] as const;
+
 const shuffleImages = <ImageType,>(images: ImageType[]) => {
   const shuffledImages = [...images];
 
@@ -40,8 +49,8 @@ const shuffleImages = <ImageType,>(images: ImageType[]) => {
 
 export default function LandingPage<DashboardKey extends string>({
   dashboardOptions,
-  onSelectDashboard,
 }: LandingPageProps<DashboardKey>) {
+  const navigate = useNavigate();
   const landingPageRef = useRef<HTMLDivElement>(null);
   const [randomizedRibbonImages] = useState(() => shuffleImages(ribbonImages));
   const [randomizedSlideshowImages] = useState(() => shuffleImages(ribbonImages));
@@ -79,12 +88,18 @@ export default function LandingPage<DashboardKey extends string>({
 
     const updateBackgroundScale = () => {
       const scrollY = window.scrollY;
+      const navProgress = reducedMotion
+        ? scrollY > 80
+          ? 1
+          : 0
+        : Math.min(Math.max(scrollY / 140, 0), 1);
       const progress = Math.min(scrollY / scrollRange, 1);
       const ribbonProgress = Math.min(Math.max((scrollY + window.innerHeight * 1.5 - ribbonTop) / ribbonTravel, 0), 1);
       const storyViewportTop = storyTop - scrollY;
       const closingProgress = Math.min(Math.max((window.innerHeight * 1.4 - storyViewportTop) / (window.innerHeight * 1.5), 0), 1);
       const heroOverlayOpacity = Math.max(1 - scrollY / (window.innerHeight * 0.85), 0);
 
+      page.style.setProperty('--landing-nav-progress', navProgress.toFixed(3));
       page.style.setProperty('--landing-background-scale', reducedMotion ? '1.015' : (1.015 + progress * 0.16).toFixed(4));
       page.style.setProperty('--landing-hero-overlay-opacity', heroOverlayOpacity.toFixed(3));
       page.style.setProperty('--landing-ribbon-offset', `${(-ribbonProgress * 92).toFixed(2)}vw`);
@@ -133,22 +148,36 @@ export default function LandingPage<DashboardKey extends string>({
   }, []);
 
   return (
-    <div ref={landingPageRef} className="landing-page">
+    <div ref={landingPageRef} id="top" className="landing-page">
       <div className="landing-background" aria-hidden="true" />
       <div className="landing-hero-overlay" aria-hidden="true" />
       <div className="landing-closing-overlay" aria-hidden="true" />
 
       <header className="landing-nav animate-fade-rise">
-        <div className="landing-wordmark">
-          <img src="/toastmasters-logo.png" alt="Toastmasters International logo" />
-          <span>Central Link Toastmasters Club</span>
-        </div>
+        <div className="landing-nav-inner">
+          <div className="landing-nav-leading">
+            <div className="landing-wordmark">
+              <img src="/toastmasters-logo.png" alt="Toastmasters International logo" />
+              <span>Central Link Toastmasters Club</span>
+            </div>
 
-        <blockquote className="landing-slogan">
-          <span aria-hidden="true">“</span>
-          Where Leaders Are Made
-          <span aria-hidden="true">”</span>
-        </blockquote>
+            <nav className="landing-nav-links" aria-label="Primary navigation">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={link.label === 'Home' ? 'is-active' : undefined}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <Link className="landing-nav-signin" to="/login">
+            Sign In
+          </Link>
+        </div>
       </header>
 
       <main className="landing-main">
@@ -192,7 +221,7 @@ export default function LandingPage<DashboardKey extends string>({
               <button
                 key={dashboardKey}
                 type="button"
-                onClick={() => onSelectDashboard(dashboardKey)}
+                onClick={() => navigate(`/club/${dashboardKey}`)}
                 className="landing-year-button"
               >
                 <span className="landing-year-number">0{index + 1}</span>
@@ -211,7 +240,7 @@ export default function LandingPage<DashboardKey extends string>({
         </section>
       </main>
 
-      <section className="landing-ribbon" aria-label="Central Link Toastmasters moments">
+      <section id="gallery" className="landing-ribbon" aria-label="Central Link Toastmasters moments">
         <div className="landing-ribbon-sticky">
           <div className="landing-ribbon-track">
             {randomizedRibbonImages.map((image, index) => (

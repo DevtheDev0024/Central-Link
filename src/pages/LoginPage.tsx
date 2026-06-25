@@ -4,6 +4,7 @@ import { Lock, Mail } from 'lucide-react';
 import AuthLayout from '../components/auth/AuthLayout';
 import { AuthInput } from '../components/auth/AuthInput';
 import { useAuth } from '../context/AuthContext';
+import { getPostLoginRedirect, LOGIN_SIGNED_OUT_STATE, type LoginRedirectState } from '../lib/authNavigation';
 
 function getAuthErrorMessage(error: unknown): string {
   if (error instanceof Error) {
@@ -25,7 +26,7 @@ export default function LoginPage() {
   const { user, loading, signIn, resetPassword } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const redirectPath = (location.state as { from?: string } | null)?.from ?? '/member';
+  const redirectPath = getPostLoginRedirect(location.state as LoginRedirectState | null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
