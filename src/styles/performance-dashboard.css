@@ -341,10 +341,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  border-radius: 28px;
   padding: 60px 32px;
-  background: #ffffff;
-  box-shadow: 0 24px 50px rgba(7, 75, 112, 0.08);
   text-align: center;
 }
 
@@ -367,12 +364,17 @@
 }
 
 .performance-in-dev p {
-  max-width: 380px;
   margin: 0;
   color: #6b7682;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .performance-in-dev p {
+    white-space: nowrap;
+  }
 }
 
 .performance-hero {
