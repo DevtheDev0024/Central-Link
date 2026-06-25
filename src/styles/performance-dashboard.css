@@ -334,6 +334,47 @@
   padding: clamp(28px, 4vw, 48px) 0 64px;
 }
 
+.performance-in-dev {
+  display: flex;
+  min-height: 60vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 28px;
+  padding: 60px 32px;
+  background: #ffffff;
+  box-shadow: 0 24px 50px rgba(7, 75, 112, 0.08);
+  text-align: center;
+}
+
+.performance-in-dev-icon {
+  display: grid;
+  width: 84px;
+  height: 84px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(0, 65, 101, 0.08);
+  color: #004165;
+}
+
+.performance-in-dev h2 {
+  margin: 6px 0 0;
+  color: #004165;
+  font-family: 'GothamCondensed-Bold', sans-serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  text-transform: uppercase;
+}
+
+.performance-in-dev p {
+  max-width: 380px;
+  margin: 0;
+  color: #6b7682;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
 .performance-hero {
   position: relative;
   display: flex;
