@@ -313,17 +313,17 @@
   width: 42px;
   height: 42px;
   padding: 0;
-  background: #d9e1e7;
+  background: #e3e5e8;
   transition: box-shadow 160ms ease, transform 160ms ease;
 }
 
 .performance-profile-button:hover {
-  box-shadow: 0 0 0 2px rgba(0, 65, 101, 0.25);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
 }
 
 .performance-profile-avatar {
   display: block;
-  color: #5a6e7a;
+  color: #8a8f96;
 }
 
 .performance-menu-button,
