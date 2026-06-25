@@ -8,7 +8,6 @@ import {
   CircleDollarSign,
   Gauge,
   HandCoins,
-  Home,
   Menu,
   Mic,
   Mic2,
@@ -103,11 +102,6 @@ export default function PerformanceDashboard() {
             <span><i /> Paid • June 2026</span>
           </div>
           <ChevronRight size={24} />
-        </a>
-
-        <a className="performance-home-link" href="/">
-          <Home size={17} />
-          Back to member portal
         </a>
       </aside>
 

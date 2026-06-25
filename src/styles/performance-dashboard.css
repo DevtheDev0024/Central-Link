@@ -146,7 +146,7 @@
   justify-content: space-between;
   margin: auto 16px 12px;
   border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 10px;
+  border-radius: 6px 6px 20px 20px;
   padding: 14px 15px;
   background: #006094;
   color: white;
@@ -179,16 +179,6 @@
   margin-right: 4px;
   border-radius: 50%;
   background: #4bd36a;
-}
-
-.performance-home-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 30px 20px;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.78rem;
-  text-decoration: none;
 }
 
 .performance-page {
