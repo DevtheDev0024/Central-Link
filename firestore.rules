@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // Replace with your officer emails after creating admin accounts in Firebase Console.
+      return isSignedIn() && request.auth.token.email in [
+        'devi0024@yahoo.com'
+      ];
+    }
+
+    match /members/{memberId} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == memberId);
+      allow create, update, delete: if false;
+    }
+  }
+}
