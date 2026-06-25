@@ -214,6 +214,10 @@
 }
 
 .performance-eyebrow {
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: normal;
   text-transform: none;
 }
 
@@ -647,7 +651,8 @@
   border-bottom: 1px solid #e7e9ea;
   color: #9aa1a5;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-project-list {
@@ -664,8 +669,9 @@
   align-items: center;
   gap: 16px;
   color: var(--pd-navy);
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 1.1rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.15;
 }
 
