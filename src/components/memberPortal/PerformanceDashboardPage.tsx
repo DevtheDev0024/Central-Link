@@ -8,14 +8,13 @@ import {
   Sparkles,
   Target,
   Trophy,
-  UsersRound,
 } from 'lucide-react';
 
 const metrics = [
-  { label: 'Speeches Delivered', value: '8', note: '2 this term', icon: Mic2 },
-  { label: 'Roles Taken', value: '14', note: '+5 this term', icon: UsersRound },
-  { label: 'Meetings Attended', value: '10', note: '92% attendance', icon: CalendarDays },
-  { label: 'Member Points', value: '312', note: 'Rank #2 in club', icon: Trophy },
+  { label: 'Speeches Delivered', value: '8', note: '2 this term' },
+  { label: 'Roles Taken', value: '14', note: '+5 this term' },
+  { label: 'Meetings Attended', value: '10', note: '92% Attendance' },
+  { label: 'Member Points', value: '312', note: 'Rank #2 in Club' },
 ];
 
 const activities = [
@@ -64,9 +63,8 @@ export default function PerformanceDashboardPage() {
       </section>
 
       <section className="performance-metrics" aria-label="Performance summary">
-        {metrics.map(({ label, value, note, icon: Icon }) => (
+        {metrics.map(({ label, value, note }) => (
           <article key={label} className="performance-metric">
-            <div className="performance-metric-icon"><Icon size={19} /></div>
             <span>{label}</span>
             <strong>{value}</strong>
             <small>{note}</small>
