@@ -967,6 +967,13 @@
   margin-top: 24px;
 }
 
+@media (min-width: 900px) {
+  .performance-achievement-badges section > div:first-child p {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
 .performance-member-performance {
   margin-top: 24px;
 }
@@ -1040,7 +1047,7 @@
   background: transparent;
   color: #333;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
