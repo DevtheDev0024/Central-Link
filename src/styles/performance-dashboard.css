@@ -56,7 +56,7 @@
   margin-top: 5px;
   color: rgba(255, 255, 255, 0.74);
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -66,7 +66,7 @@
   margin-top: 4px;
   color: rgba(255, 255, 255, 0.7);
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -82,7 +82,7 @@
   display: block;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
-  font-size: 0.94rem;
+  font-size: 1rem;
 }
 
 .performance-avatar {
@@ -115,7 +115,7 @@
   padding: 0 16px 0 25px;
   color: #ffffff;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
   transition: background 160ms ease;
@@ -162,7 +162,7 @@
 .performance-dues-mini strong {
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .performance-dues-mini span {
@@ -170,7 +170,7 @@
   color: rgba(255, 255, 255, 0.67);
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
-  font-size: 0.6875rem;
+  font-size: 1rem;
 }
 
 .performance-dues-mini i {
@@ -207,7 +207,7 @@
   display: block;
   color: #781327;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.6875rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.19em;
   text-transform: uppercase;
@@ -263,7 +263,7 @@
   background: transparent;
   color: #102338;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -377,7 +377,7 @@
   color: #6b7682;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -464,7 +464,7 @@
   color: rgba(255, 255, 255, 0.72);
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
-  font-size: 0.8125rem;
+  font-size: 1rem;
 }
 
 .performance-pathway-meta strong {
@@ -519,8 +519,9 @@
 
 .performance-metric > span {
   color: var(--pd-maroon);
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.95rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-metric > strong {
@@ -534,7 +535,8 @@
 .performance-metric small {
   color: #5f6b73;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.92rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-grid {
@@ -610,8 +612,9 @@
   flex: 0 0 auto;
   place-items: center;
   border-radius: 50%;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.875rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-level > i {
@@ -700,8 +703,9 @@
   background: none;
   color: var(--pd-blue);
   cursor: pointer;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.78rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-fees-card {
@@ -760,7 +764,9 @@
 
 .performance-fees-details strong {
   margin-top: 3px;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-fees-card > button {
@@ -778,8 +784,9 @@
   background: var(--pd-gold);
   color: #332b0d;
   cursor: pointer;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.86rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .performance-activity-card,
@@ -821,8 +828,9 @@
 
 .performance-activity-item strong {
   overflow: hidden;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.83rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -857,8 +865,9 @@
 }
 
 .performance-achievement-row span {
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.72rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.25;
 }
 
