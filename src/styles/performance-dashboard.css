@@ -1379,7 +1379,7 @@
   justify-content: center;
   border: 1px solid #e1e4e6;
   border-radius: 18px;
-  padding: 16px 18px;
+  padding: 14px 16px;
   background: white;
   box-shadow: 0 8px 24px rgba(16, 35, 56, 0.05);
 }
@@ -1388,19 +1388,19 @@
   margin: 0;
   color: #004165;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 600;
 }
 
 .performance-scoring-points {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  margin: 8px 0 0;
+  gap: 4px;
+  margin: 6px 0 0;
   color: #394955;
   font-family: 'MyriadPro-Regular', Arial, sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 0.875rem;
+  line-height: 1.25;
 }
 
 .performance-scoring-points p {
@@ -1498,15 +1498,15 @@
   margin: 4px 0 0;
   color: #102338;
   font-family: 'MyriadPro-Regular', Arial, sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 0.875rem;
+  line-height: 1.25;
 }
 
 .performance-calculator-stack > section > p {
   margin: 16px 0 0;
   color: #8c1d36;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -1644,6 +1644,11 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 7px;
+  }
+
+  .performance-scoring-quote,
+  .performance-points-modal .points-modal-footer {
+    font-size: 1.15rem;
   }
 
   .performance-progress-card,
