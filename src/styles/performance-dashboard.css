@@ -307,13 +307,11 @@
 }
 
 .performance-profile-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 42px;
   height: 42px;
   padding: 0;
-  background: #e3e5e8;
+  overflow: hidden;
+  background: transparent;
   transition: box-shadow 160ms ease, transform 160ms ease;
 }
 
@@ -323,7 +321,8 @@
 
 .performance-profile-avatar {
   display: block;
-  color: #8a8f96;
+  width: 100%;
+  height: 100%;
 }
 
 .performance-menu-button,

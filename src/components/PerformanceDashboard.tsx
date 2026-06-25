@@ -16,7 +16,6 @@ import {
   Sparkles,
   Target,
   Trophy,
-  UserCircle,
   UsersRound,
   X,
 } from 'lucide-react';
@@ -125,7 +124,18 @@ export default function PerformanceDashboard() {
               <span />
             </button>
             <button type="button" className="performance-profile-button" aria-label="Open profile">
-              <UserCircle className="performance-profile-avatar" size={26} strokeWidth={1.5} aria-hidden="true" />
+              <svg className="performance-profile-avatar" viewBox="0 0 42 42" aria-hidden="true">
+                <defs>
+                  <clipPath id="performance-profile-clip">
+                    <circle cx="21" cy="21" r="21" />
+                  </clipPath>
+                </defs>
+                <g clipPath="url(#performance-profile-clip)">
+                  <rect width="42" height="42" fill="#b6bac3" />
+                  <circle cx="21" cy="16" r="7.5" fill="#fff" />
+                  <circle cx="21" cy="38" r="14" fill="#fff" />
+                </g>
+              </svg>
             </button>
           </div>
         </header>
