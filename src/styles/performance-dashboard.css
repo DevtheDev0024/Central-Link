@@ -963,6 +963,10 @@
   white-space: nowrap;
 }
 
+.performance-achievement-badges {
+  margin-top: 24px;
+}
+
 .performance-backdrop {
   display: none;
 }

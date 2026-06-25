@@ -1,4 +1,8 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Check, ChevronRight } from 'lucide-react';
+import type { BadgeDefinition } from '../../types/badges';
+import BadgeDetailOverlay from '../dashboard/BadgeDetailOverlay';
+import BadgeGridSection from '../dashboard/BadgeGridSection';
 
 const metrics = [
   { label: 'Speeches Delivered', value: '8', note: '2 this term' },
@@ -57,6 +61,54 @@ function groupBadges<T>(badges: T[]) {
 
 export default function PerformanceDashboardPage() {
   const badgeRows = groupBadges(earnedBadges);
+  const [selectedBadge, setSelectedBadge] = useState<BadgeDefinition | null>(null);
+  const [isBadgeDetailClosing, setIsBadgeDetailClosing] = useState(false);
+  const badgeCloseTimeoutRef = useRef<number | null>(null);
+
+  const openSelectedBadge = (badge: BadgeDefinition) => {
+    if (badgeCloseTimeoutRef.current) {
+      window.clearTimeout(badgeCloseTimeoutRef.current);
+      badgeCloseTimeoutRef.current = null;
+    }
+
+    setIsBadgeDetailClosing(false);
+    setSelectedBadge(badge);
+  };
+
+  const closeSelectedBadge = useCallback(() => {
+    if (!selectedBadge || isBadgeDetailClosing) return;
+
+    setIsBadgeDetailClosing(true);
+
+    if (badgeCloseTimeoutRef.current) {
+      window.clearTimeout(badgeCloseTimeoutRef.current);
+    }
+
+    badgeCloseTimeoutRef.current = window.setTimeout(() => {
+      setSelectedBadge(null);
+      setIsBadgeDetailClosing(false);
+      badgeCloseTimeoutRef.current = null;
+    }, 220);
+  }, [isBadgeDetailClosing, selectedBadge]);
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeSelectedBadge();
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [closeSelectedBadge]);
+
+  useEffect(() => {
+    return () => {
+      if (badgeCloseTimeoutRef.current) {
+        window.clearTimeout(badgeCloseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -187,6 +239,12 @@ export default function PerformanceDashboardPage() {
           </div>
         </article>
       </section>
+
+      <div className="performance-achievement-badges">
+        <BadgeGridSection onBadgeClick={openSelectedBadge} />
+      </div>
+
+      <BadgeDetailOverlay badge={selectedBadge} isClosing={isBadgeDetailClosing} onClose={closeSelectedBadge} />
     </>
   );
 }
