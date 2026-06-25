@@ -2,11 +2,11 @@ import {
   Award,
   BookOpen,
   CalendarDays,
+  Check,
   ChevronRight,
   CircleDollarSign,
   Mic2,
   Sparkles,
-  Target,
   Trophy,
 } from 'lucide-react';
 
@@ -28,6 +28,21 @@ const earnedBadges = [
   { name: 'Meeting Star', image: '/badges/Meeting-Star.png' },
   { name: 'Contest Supporter', image: '/badges/Contest-Supporter.png' },
   { name: 'Evaluation Champion', image: '/badges/Evaluation-Champion.png' },
+];
+
+const pathwayLevels = [
+  { level: 'L1', status: 'complete' },
+  { level: 'L2', status: 'complete' },
+  { level: 'L3', status: 'current' },
+  { level: 'L4', status: 'locked' },
+  { level: 'L5', status: 'locked' },
+];
+
+const pathwayProjects = [
+  { name: 'Understanding Your Communication Style', done: true },
+  { name: 'Effective Body Language', done: true },
+  { name: 'Persuasive Speaking', done: false },
+  { name: 'Managing a Difficult Audience', done: false },
 ];
 
 export default function PerformanceDashboardPage() {
@@ -86,27 +101,26 @@ export default function PerformanceDashboardPage() {
           </div>
 
           <div className="performance-levels">
-            {[
-              { level: 'L1', label: 'Mastering Fundamentals', status: 'complete' },
-              { level: 'L2', label: 'Learning Your Style', status: 'complete' },
-              { level: 'L3', label: 'Increasing Knowledge', status: 'current' },
-              { level: 'L4', label: 'Building Skills', status: 'locked' },
-              { level: 'L5', label: 'Demonstrating Expertise', status: 'locked' },
-            ].map((item) => (
+            {pathwayLevels.map((item) => (
               <div key={item.level} className={`performance-level is-${item.status}`}>
-                <div><span>{item.level}</span><i /></div>
-                <small>{item.label}</small>
+                <span>{item.level}</span>
+                <i />
               </div>
             ))}
           </div>
 
-          <div className="performance-next-project">
-            <div className="performance-next-icon"><Target size={22} /></div>
-            <div>
-              <span>Next project</span>
-              <strong>Connect With Your Audience</strong>
-            </div>
-            <button type="button">View pathway <ChevronRight size={17} /></button>
+          <div className="performance-projects">
+            <span className="performance-projects-title">Level 3 Projects</span>
+            <ul className="performance-project-list">
+              {pathwayProjects.map((project) => (
+                <li key={project.name} className={project.done ? 'is-done' : 'is-pending'}>
+                  <span className="performance-project-mark">
+                    {project.done && <Check size={15} strokeWidth={3.5} />}
+                  </span>
+                  <span>{project.name}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </article>
 

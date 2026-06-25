@@ -587,109 +587,103 @@
 .performance-levels {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin: 31px 0 33px;
+  gap: 16px;
+  margin: 30px 0 28px;
 }
 
-.performance-level > div {
+.performance-level {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.performance-level > div span {
+.performance-level > span {
   display: grid;
-  width: 31px;
-  height: 31px;
+  width: 34px;
+  height: 34px;
   flex: 0 0 auto;
   place-items: center;
   border-radius: 50%;
   font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
 }
 
-.performance-level > div i {
+.performance-level > i {
   width: 100%;
-  height: 5px;
-  margin-left: 5px;
+  height: 6px;
   border-radius: 999px;
 }
 
-.performance-level small {
-  display: block;
-  max-width: 100px;
-  margin-top: 8px;
-  color: #8a9297;
-  font-size: 0.66rem;
-  line-height: 1.25;
-}
-
-.performance-level.is-complete span,
-.performance-level.is-complete i {
+.performance-level.is-complete > span,
+.performance-level.is-complete > i {
   background: #37be67;
   color: white;
 }
 
-.performance-level.is-current span {
+.performance-level.is-current > span {
   background: var(--pd-gold);
   color: #52440d;
 }
 
-.performance-level.is-current i {
-  background: linear-gradient(90deg, var(--pd-gold) 55%, #ebedef 55%);
+.performance-level.is-current > i {
+  background: linear-gradient(90deg, var(--pd-gold) 55%, #e6e8ea 55%);
 }
 
-.performance-level.is-locked span {
-  background: #ebedef;
+.performance-level.is-locked > span {
+  background: #e4e7e9;
+  color: #aeb4b8;
+}
+
+.performance-level.is-locked > i {
+  background: #e6e8ea;
+}
+
+.performance-projects-title {
+  display: block;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e7e9ea;
+  color: #9aa1a5;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1.05rem;
+}
+
+.performance-project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.performance-project-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--pd-navy);
+  font-family: 'MyriadPro-Bold', Arial, sans-serif;
+  font-size: 1.1rem;
+}
+
+.performance-project-mark {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.performance-project-list li.is-done .performance-project-mark {
+  background: #37be67;
   color: white;
 }
 
-.performance-level.is-locked i {
-  background: #ebedef;
+.performance-project-list li.is-pending .performance-project-mark {
+  border: 2px solid #e6cf6a;
+  background: transparent;
 }
 
-.performance-next-project {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  border-radius: 16px;
-  padding: 16px;
-  background: #f5f7f7;
-}
-
-.performance-next-icon {
-  display: grid;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 13px;
-  background: #e1edf2;
-  color: var(--pd-blue);
-}
-
-.performance-next-project > div:nth-child(2) {
-  min-width: 0;
-}
-
-.performance-next-project span,
-.performance-next-project strong {
-  display: block;
-}
-
-.performance-next-project span {
-  color: #899196;
-  font-size: 0.73rem;
-}
-
-.performance-next-project strong {
-  overflow: hidden;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.9rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.performance-next-project button,
 .performance-section-heading button {
   margin-left: auto;
   border: 0;
@@ -698,13 +692,6 @@
   cursor: pointer;
   font-family: 'MyriadPro-Bold', Arial, sans-serif;
   font-size: 0.78rem;
-}
-
-.performance-next-project button {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  white-space: nowrap;
 }
 
 .performance-fees-card {
