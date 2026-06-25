@@ -1063,13 +1063,13 @@
   font-weight: 600;
   white-space: nowrap;
   box-shadow: 0 5px 14px rgba(16, 35, 56, 0.1);
-  transition: width 280ms cubic-bezier(0.22, 1, 0.36, 1), background 160ms ease, box-shadow 160ms ease;
+  transition: width 620ms cubic-bezier(0.22, 1, 0.36, 1), background 240ms ease, box-shadow 240ms ease;
 }
 
 .performance-points-help-button span {
   max-width: 0;
   opacity: 0;
-  transition: max-width 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+  transition: max-width 620ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease 120ms;
 }
 
 .performance-points-help-button:hover,
@@ -1258,10 +1258,10 @@
 }
 
 .performance-points-modal {
-  border-color: rgba(0, 65, 101, 0.16);
+  border: 0;
   border-radius: 24px;
   background: #f3f4f2;
-  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-family: 'MyriadPro-Regular', Arial, sans-serif;
   box-shadow: 0 30px 90px rgba(4, 30, 47, 0.42);
 }
 
@@ -1270,8 +1270,17 @@
   background: #004165;
 }
 
+.performance-points-modal .points-modal-header > button {
+  box-shadow: none;
+  outline: 0;
+  --tw-ring-shadow: 0 0 #0000;
+}
+
 .performance-points-modal .points-modal-header > div > p {
   color: #f3d96d;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: normal;
   text-transform: none;
 }
@@ -1284,10 +1293,27 @@
 }
 
 .performance-points-modal .points-modal-tabs {
+  display: flex;
+  justify-content: center;
+  border-bottom: 0;
+  padding-block: 13px;
   background: #f3f4f2;
 }
 
+.performance-points-modal .points-modal-tabs > div {
+  display: inline-flex;
+  width: auto;
+  grid-template-columns: none;
+  gap: 3px;
+  border-radius: 999px;
+  padding: 3px;
+  background: #e4e7e7;
+  box-shadow: none;
+}
+
 .performance-points-modal .points-modal-tab {
+  border-radius: 999px;
+  padding: 8px 18px;
   color: #004165;
   font-family: 'MyriadPro-Semibold', Arial, sans-serif;
   font-weight: 600;
@@ -1302,8 +1328,188 @@
   background: #f3f4f2;
 }
 
+.performance-scoring-bento {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.performance-scoring-left {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.performance-scoring-right {
+  display: flex;
+  min-height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.performance-scoring-right-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.performance-scoring-meeting-awards {
+  grid-column: 1 / -1;
+}
+
+.performance-scoring-meeting-awards > .performance-scoring-card {
+  min-height: 116px;
+}
+
+.performance-scoring-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #e1e4e6;
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(16, 35, 56, 0.05);
+}
+
+.performance-scoring-card h4 {
+  margin: 0;
+  color: #004165;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.performance-scoring-points {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 8px 0 0;
+  color: #394955;
+  font-family: 'MyriadPro-Regular', Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.performance-scoring-points p {
+  margin: 0;
+}
+
+.performance-scoring-card strong {
+  color: #102338;
+  font-family: 'MyriadPro-Bold', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.performance-scoring-quote {
+  margin: auto 26px 0;
+  padding: 16px 12px 20px;
+  color: #004165;
+  font-family: 'GothamCondensed-Book', sans-serif;
+  font-size: 1.65rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.performance-calculator-stack {
+  display: block;
+}
+
+.performance-calculator-stack > section {
+  border: 1px solid #e1e4e6;
+  border-radius: 18px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(16, 35, 56, 0.05);
+}
+
+.performance-calculator-stack > section > span,
+.performance-calculator-stack dt {
+  color: #68747c;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.performance-calculator-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+}
+
+.performance-calculator-heading > span,
+.performance-calculator-heading select {
+  color: #004165;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.performance-calculator-heading label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  border-bottom: 1px solid #8c9aa2;
+}
+
+.performance-calculator-heading select {
+  width: auto;
+  max-width: 280px;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  padding: 0 25px 3px 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.performance-calculator-heading svg {
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+}
+
+.performance-calculator-stack dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 18px 0 0;
+}
+
+.performance-calculator-stack dl div {
+  border-bottom: 1px solid #e3e5e6;
+  padding-bottom: 10px;
+}
+
+.performance-calculator-stack dd {
+  margin: 4px 0 0;
+  color: #102338;
+  font-family: 'MyriadPro-Regular', Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.performance-calculator-stack > section > p {
+  margin: 16px 0 0;
+  color: #8c1d36;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
 .performance-points-modal .points-modal-footer {
-  background: #004165;
+  margin-top: 20px;
+  padding: 0;
+  background: transparent;
+  color: #004165;
+  font-family: 'GothamCondensed-Book', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .performance-backdrop {
@@ -1409,6 +1615,26 @@
 
   .performance-members-table {
     min-width: 1050px;
+  }
+
+  .performance-scoring-bento,
+  .performance-calculator-stack dl {
+    grid-template-columns: 1fr;
+  }
+
+  .performance-scoring-left,
+  .performance-scoring-right-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .performance-scoring-meeting-awards {
+    grid-column: auto;
+  }
+
+  .performance-calculator-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
   }
 
   .performance-progress-card,
