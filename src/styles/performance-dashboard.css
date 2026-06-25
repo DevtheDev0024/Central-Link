@@ -385,7 +385,7 @@
   justify-content: space-between;
   gap: 32px;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 30px;
   padding: 34px clamp(30px, 4vw, 54px);
   background:
     radial-gradient(circle at 72% -30%, rgba(255, 255, 255, 0.18), transparent 35%),
@@ -406,19 +406,59 @@
 }
 
 .performance-welcome {
-  color: var(--pd-gold);
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
+  color: #f2df74;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-weight: 600;
   font-size: 1rem;
 }
 
-.performance-hero h2 {
+.performance-hero-headline {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 22px;
   margin: 5px 0 10px;
+}
+
+.performance-hero-headline h2 {
+  margin: 0;
   font-family: 'GothamCondensed-Bold', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 0.95;
   text-transform: uppercase;
+}
+
+.performance-hero-badges {
+  position: relative;
+  flex: 0 0 auto;
+  width: 92px;
+  height: 92px;
+  align-self: center;
+}
+
+.performance-hero-badges img {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  filter: drop-shadow(0 4px 9px rgba(0, 0, 0, 0.32));
+}
+
+.performance-hero-badges img:nth-child(1) {
+  left: 0;
+  top: 0;
+}
+
+.performance-hero-badges img:nth-child(2) {
+  left: 46px;
+  top: 9px;
+}
+
+.performance-hero-badges img:nth-child(3) {
+  left: 23px;
+  top: 46px;
 }
 
 .performance-pathway-meta {
@@ -426,12 +466,15 @@
   flex-wrap: wrap;
   gap: 8px 38px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 0.9rem;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
 }
 
 .performance-pathway-meta strong {
   color: white;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-weight: 600;
 }
 
 .performance-hero-score {
@@ -448,7 +491,7 @@
 }
 
 .performance-hero-score strong {
-  color: var(--pd-gold);
+  color: #f2df74;
   font-family: 'GothamCondensed-Bold', sans-serif;
   font-size: clamp(3.2rem, 5vw, 4.5rem);
   line-height: 0.8;
@@ -456,9 +499,9 @@
 
 .performance-hero-score span {
   margin-top: 10px;
-  font-family: 'MyriadPro-Bold', Arial, sans-serif;
-  font-size: 0.85rem;
-  text-transform: uppercase;
+  font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .performance-metrics {

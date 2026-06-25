@@ -24,13 +24,27 @@ const activities = [
   { title: 'Attended weekly club meeting', date: 'June 6', points: '+10 pts', icon: CalendarDays },
 ];
 
+// Placeholder set — earned badges will be fetched/routed per member later.
+const earnedBadges = [
+  { name: 'Meeting Star', image: '/badges/Meeting-Star.png' },
+  { name: 'Contest Supporter', image: '/badges/Contest-Supporter.png' },
+  { name: 'Evaluation Champion', image: '/badges/Evaluation-Champion.png' },
+];
+
 export default function PerformanceDashboardPage() {
   return (
     <>
       <section className="performance-hero">
         <div className="performance-hero-copy">
-          <span className="performance-welcome">Welcome back!</span>
-          <h2>Dulain Gunawardhana</h2>
+          <span className="performance-welcome">Welcome Back!</span>
+          <div className="performance-hero-headline">
+            <h2>Dulain Gunawardhana</h2>
+            <div className="performance-hero-badges" aria-label="Earned badges">
+              {earnedBadges.map((badge) => (
+                <img key={badge.name} src={badge.image} alt={`${badge.name} badge`} title={badge.name} />
+              ))}
+            </div>
+          </div>
           <div className="performance-pathway-meta">
             <span>Pathway: <strong>Presentation Mastery</strong></span>
             <span>Level: <strong>3 of 5</strong></span>
@@ -44,7 +58,7 @@ export default function PerformanceDashboardPage() {
           </div>
           <div>
             <strong>12</strong>
-            <span>Week streak</span>
+            <span>Week Streak</span>
           </div>
         </div>
       </section>
