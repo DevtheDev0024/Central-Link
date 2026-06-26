@@ -7,7 +7,7 @@ type ContactSectionProps = {
 
 export default function ContactSection({ className }: ContactSectionProps) {
   return (
-    <section
+    <footer
       id="contact"
       className={`contact-section landing-reveal${className ? ` ${className}` : ''}`}
       data-landing-reveal
@@ -47,6 +47,11 @@ export default function ContactSection({ className }: ContactSectionProps) {
           <ContactForm />
         </div>
       </div>
-    </section>
+
+      <div className="contact-footer-bottom" aria-label="Site status">
+        <span>© 2026 Central Link Toastmasters</span>
+        <span>All systems operational</span>
+      </div>
+    </footer>
   );
 }

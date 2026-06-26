@@ -264,11 +264,6 @@ export default function LandingPage<DashboardKey extends string>({
       </section>
 
       <ContactSection />
-
-      <footer className="landing-footer">
-        <span>© 2026 Central Link Toastmasters</span>
-        <span>All systems operational</span>
-      </footer>
     </div>
   );
 }
