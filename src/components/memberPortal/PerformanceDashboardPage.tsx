@@ -308,6 +308,7 @@ export default function PerformanceDashboardPage() {
       <div className="performance-member-performance">
         <MemberPerformanceSection
           members={visibleMembers}
+          rankingMembers={performanceMembers}
           searchTerm={memberSearchTerm}
           onSearchChange={setMemberSearchTerm}
           sortField={memberSortField}
