@@ -12,6 +12,17 @@
     <meta name="twitter:image" content="/toastmasters-logo.png" />
   </head>
   <body>
+    <script>
+      (function () {
+        var redirectPath = sessionStorage.getItem('spaRedirectPath');
+        if (!redirectPath) return;
+        sessionStorage.removeItem('spaRedirectPath');
+        var currentPath = window.location.pathname + window.location.search + window.location.hash;
+        if (redirectPath !== currentPath) {
+          window.history.replaceState(null, '', redirectPath);
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
