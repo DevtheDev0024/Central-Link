@@ -4,8 +4,11 @@ import AdminDashboardLayout from './components/admin/AdminDashboardLayout';
 import AdminInDevelopmentPage from './components/admin/AdminInDevelopmentPage';
 import { adminNavItems } from './components/admin/navItems';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import ExcoRolesPage from './components/memberPortal/ExcoRolesPage';
 import InDevelopmentPage from './components/memberPortal/InDevelopmentPage';
+import MeetingRolesPage from './components/memberPortal/MeetingRolesPage';
 import MemberPortalLayout from './components/memberPortal/MemberPortalLayout';
+import PathwaysPage from './components/memberPortal/PathwaysPage';
 import PerformanceDashboardPage from './components/memberPortal/PerformanceDashboardPage';
 import { memberPortalNav } from './components/memberPortal/navItems';
 import { DASHBOARD_SOURCES, type DashboardYearKey } from './config/dashboardYears';
@@ -60,8 +63,17 @@ function App() {
           }
         >
           <Route index element={<PerformanceDashboardPage />} />
+          <Route path="pathways" element={<PathwaysPage />} />
+          <Route path="meeting-roles" element={<MeetingRolesPage />} />
+          <Route path="exco-roles-duties" element={<ExcoRolesPage />} />
           {memberPortalNav
-            .filter((item) => item.slug)
+            .filter(
+              (item) =>
+                item.slug &&
+                item.slug !== 'pathways' &&
+                item.slug !== 'meeting-roles' &&
+                item.slug !== 'exco-roles-duties',
+            )
             .map((item) => (
               <Route
                 key={item.slug}

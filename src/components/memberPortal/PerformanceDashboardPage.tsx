@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { ChevronRight } from 'lucide-react';
+import { Check, ChevronRight } from 'lucide-react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { BADGE_CALCULATOR_RULES } from '../../data/badgeCalculatorRules';
 import { BADGE_DEFINITIONS } from '../../data/badgeDefinitions';
+import { getCurrentLevel, getOverallPercent, PATHWAY_NAME, pathwayLevels } from '../../data/pathwayMockData';
 import type { BadgeDefinition } from '../../types/badges';
 import type { PointsModalTab } from '../../types/badges';
 import type { Member } from '../../types/member';
@@ -37,6 +38,9 @@ const recentActivities: MemberActivity[] = [];
 function normalizeMembershipNumber(value: string | undefined | null): string {
   return (value ?? '').replace(/\s+/g, '').toUpperCase();
 }
+
+const pathwayProjects = getCurrentLevel(pathwayLevels).projects;
+const pathwayLevelStepper = pathwayLevels.map(({ label, status }) => ({ level: label, status }));
 
 function groupBadges<T>(badges: T[]) {
   const rowCount = Math.ceil(badges.length / 4);
@@ -276,8 +280,8 @@ export default function PerformanceDashboardPage() {
             ) : null}
           </div>
           <div className="performance-pathway-meta">
-            <span>Pathway: <strong>Presentation Mastery</strong></span>
-            <span>Level: <strong>3 of 5</strong></span>
+            <span>Pathway: <strong>{PATHWAY_NAME}</strong></span>
+            <span>Level: <strong>{getCurrentLevel(pathwayLevels).level} of 5</strong></span>
           </div>
         </div>
 
@@ -304,6 +308,44 @@ export default function PerformanceDashboardPage() {
       </section>
 
       <section className="performance-grid">
+        <article className="performance-card performance-progress-card">
+          <div className="performance-card-heading">
+            <div>
+              <span className="performance-eyebrow">Pathways progress</span>
+              <h3>{PATHWAY_NAME}</h3>
+            </div>
+            <div className="performance-percent">
+              <strong>{getOverallPercent(pathwayLevels)}%</strong>
+              <span>Overall</span>
+            </div>
+          </div>
+
+          <div className="performance-levels">
+            {pathwayLevelStepper.map((item) => (
+              <div key={item.level} className={`performance-level is-${item.status}`}>
+                <span>{item.level}</span>
+                <i />
+              </div>
+            ))}
+          </div>
+
+          <div className="performance-projects">
+            <span className="performance-projects-title">Level {getCurrentLevel(pathwayLevels).level} Projects</span>
+            <ul className="performance-project-list">
+              {pathwayProjects.map((project) => (
+                <li key={project.name} className={project.done ? 'is-done' : 'is-pending'}>
+                  <span className="performance-project-mark">
+                    {project.done && <Check size={15} strokeWidth={3.5} />}
+                  </span>
+                  <span>{project.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="performance-badges-footer">
+            <Link to="/member/pathways">View Pathways <ChevronRight size={20} /></Link>
+          </div>
+        </article>
         <article className="performance-card performance-activity-card">
           <div className="performance-activity-heading">
             <span className="performance-eyebrow">Latest Updates</span>
