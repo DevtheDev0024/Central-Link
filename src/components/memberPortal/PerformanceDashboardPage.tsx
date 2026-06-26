@@ -97,7 +97,10 @@ export default function PerformanceDashboardPage() {
   const [showPointsModal, setShowPointsModal] = useState(false);
   const [pointsModalTab, setPointsModalTab] = useState<PointsModalTab>('scoring');
   const [selectedCalculatorBadgeId, setSelectedCalculatorBadgeId] = useState(BADGE_CALCULATOR_RULES[0].id);
+  const [leaderboardAnimationProgress, setLeaderboardAnimationProgress] = useState(0);
+  const [hasAnimatedLeaderboard, setHasAnimatedLeaderboard] = useState(false);
   const badgeCloseTimeoutRef = useRef<number | null>(null);
+  const leaderboardCardRef = useRef<HTMLElement | null>(null);
   const topPerformers = useMemo(() => {
     return [...performanceMembers].sort((first, second) => second.ajScore - first.ajScore).slice(0, 5);
   }, []);
@@ -176,6 +179,67 @@ export default function PerformanceDashboardPage() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const leaderboardCard = leaderboardCardRef.current;
+    if (!leaderboardCard || hasAnimatedLeaderboard) return;
+
+    let animationFrame = 0;
+    let observer: IntersectionObserver | null = null;
+
+    const animateLeaderboard = () => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduceMotion) {
+        setLeaderboardAnimationProgress(1);
+        setHasAnimatedLeaderboard(true);
+        return;
+      }
+
+      const duration = 950;
+      const startTime = performance.now();
+
+      const tick = (time: number) => {
+        const progress = Math.min((time - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+        setLeaderboardAnimationProgress(easedProgress);
+
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(tick);
+          return;
+        }
+
+        setHasAnimatedLeaderboard(true);
+      };
+
+      setLeaderboardAnimationProgress(0);
+      animationFrame = requestAnimationFrame(tick);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      animateLeaderboard();
+      return () => cancelAnimationFrame(animationFrame);
+    }
+
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+
+        observer?.disconnect();
+        observer = null;
+        animateLeaderboard();
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(leaderboardCard);
+
+    return () => {
+      observer?.disconnect();
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [hasAnimatedLeaderboard]);
 
   return (
     <>
@@ -273,7 +337,7 @@ export default function PerformanceDashboardPage() {
           </div>
         </article>
 
-        <article className="performance-card performance-leaderboard-card">
+        <article ref={leaderboardCardRef} className="performance-card performance-leaderboard-card">
           <div className="performance-leaderboard-heading">
             <span className="performance-eyebrow">Leaderboard</span>
             <h3>Top 5 Performers</h3>
@@ -287,10 +351,10 @@ export default function PerformanceDashboardPage() {
                   <div className="performance-leaderboard-track">
                     <span
                       style={{
-                        '--leaderboard-width': `${(member.ajScore / topPerformerScore) * 100}%`,
+                        '--leaderboard-width': `${(member.ajScore / topPerformerScore) * 100 * leaderboardAnimationProgress}%`,
                       } as CSSProperties}
                     >
-                      {member.ajScore.toLocaleString()}
+                      {Math.round(member.ajScore * leaderboardAnimationProgress).toLocaleString()}
                     </span>
                   </div>
                 </div>
