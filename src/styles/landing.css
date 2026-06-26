@@ -218,7 +218,9 @@
 }
 
 .landing-hero {
+  align-self: end;
   max-width: 46rem;
+  transform: translateY(clamp(6rem, 14vh, 8rem));
 }
 
 .landing-kicker {
@@ -240,7 +242,7 @@
 }
 
 .landing-title {
-  margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
+  margin: 0;
   color: #fff;
   max-width: 46rem;
   font-family: 'GothamCondensed-Bold', sans-serif;
@@ -274,8 +276,8 @@
 }
 
 .landing-description {
-  max-width: 35rem;
-  margin: clamp(2rem, 5vh, 3rem) 0 0;
+  max-width: 44rem;
+  margin: 2rem 0 0;
   color: rgba(255, 255, 255, 0.78);
   font-size: clamp(0.98rem, 1.1vw, 1.08rem);
   font-weight: 400;
@@ -286,7 +288,7 @@
 .landing-club-note {
   display: flex;
   gap: 1rem;
-  margin-top: clamp(3rem, 7vh, 5rem);
+  margin-top: 2.75rem;
   color: rgba(255, 255, 255, 0.6);
   font-family: var(--landing-display);
   font-size: 0.72rem;
@@ -618,6 +620,7 @@
 
   .landing-hero {
     max-width: 40rem;
+    transform: translateY(6rem);
   }
 
   .landing-dashboard-panel {
@@ -672,6 +675,11 @@
     padding: 4.5rem 0 2.5rem;
   }
 
+  .landing-hero {
+    transform: none;
+    margin-top: 2rem;
+  }
+
   .landing-title {
     font-size: clamp(3rem, 13vw, 4.35rem);
     line-height: 0.98;
@@ -687,7 +695,7 @@
   .landing-club-note {
     display: grid;
     gap: 0.5rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   .landing-club-note span + span {
