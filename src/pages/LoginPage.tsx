@@ -5,7 +5,7 @@ import AuthLayout from '../components/auth/AuthLayout';
 import { AuthInput } from '../components/auth/AuthInput';
 import { useAuth } from '../context/AuthContext';
 import { getAuthErrorMessage } from '../lib/authErrors';
-import { getPostLoginRedirect, LOGIN_SIGNED_OUT_STATE, type LoginRedirectState } from '../lib/authNavigation';
+import { getPostLoginRedirect, type LoginRedirectState } from '../lib/authNavigation';
 
 function getLoginErrorMessage(error: unknown): string {
   return getAuthErrorMessage(error, 'Unable to sign in. Please check your credentials and try again.');
