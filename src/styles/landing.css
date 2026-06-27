@@ -199,6 +199,11 @@
   outline-offset: 4px;
 }
 
+.landing-mobile-menu-toggle,
+.landing-mobile-menu {
+  display: none;
+}
+
 .landing-year-button:focus-visible {
   outline: 3px solid rgba(244, 220, 138, 0.9);
   outline-offset: 4px;
@@ -218,7 +223,9 @@
 }
 
 .landing-hero {
+  align-self: end;
   max-width: 46rem;
+  transform: translateY(clamp(6rem, 14vh, 8rem));
 }
 
 .landing-kicker {
@@ -240,7 +247,7 @@
 }
 
 .landing-title {
-  margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
+  margin: 0;
   color: #fff;
   max-width: 46rem;
   font-family: 'GothamCondensed-Bold', sans-serif;
@@ -274,8 +281,8 @@
 }
 
 .landing-description {
-  max-width: 35rem;
-  margin: clamp(2rem, 5vh, 3rem) 0 0;
+  max-width: 44rem;
+  margin: 2rem 0 0;
   color: rgba(255, 255, 255, 0.78);
   font-size: clamp(0.98rem, 1.1vw, 1.08rem);
   font-weight: 400;
@@ -286,7 +293,7 @@
 .landing-club-note {
   display: flex;
   gap: 1rem;
-  margin-top: clamp(3rem, 7vh, 5rem);
+  margin-top: 2.75rem;
   color: rgba(255, 255, 255, 0.6);
   font-family: var(--landing-display);
   font-size: 0.72rem;
@@ -618,6 +625,7 @@
 
   .landing-hero {
     max-width: 40rem;
+    transform: translateY(6rem);
   }
 
   .landing-dashboard-panel {
@@ -634,7 +642,7 @@
   .landing-nav-inner,
   .landing-main,
   .landing-story {
-    width: min(100% - 1.5rem, 90rem);
+    width: min(100% - 2.5rem, 90rem);
   }
 
   .landing-nav-inner {
@@ -642,15 +650,22 @@
   }
 
   .landing-wordmark {
-    gap: 0.6rem;
-    font-size: 1.2rem;
+    gap: 0.5rem;
+    min-width: 0;
+    font-size: 1.05rem;
     line-height: 1.05;
     letter-spacing: 0.025em;
   }
 
   .landing-wordmark img {
-    width: 2.45rem;
-    height: 2.45rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .landing-wordmark span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .landing-nav-leading {
@@ -659,35 +674,126 @@
   }
 
   .landing-nav-actions {
-    gap: 0.75rem;
-  }
-
-  .landing-nav-links {
     display: none;
   }
 
+  .landing-mobile-menu-toggle {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    padding: 0;
+    background: rgba(8, 17, 34, 0.34);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 180ms ease, border-color 180ms ease;
+  }
+
+  .landing-mobile-menu-toggle:hover,
+  .landing-mobile-menu-toggle:focus-visible {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .landing-mobile-menu-toggle:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 3px;
+  }
+
+  .landing-nav.is-menu-open {
+    background: rgba(0, 65, 101, 0.98);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+  }
+
+  .landing-mobile-menu {
+    display: grid;
+    width: min(100% - 2.5rem, 90rem);
+    max-height: 0;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.5rem);
+    visibility: hidden;
+    transition: max-height 260ms ease, opacity 180ms ease, padding 260ms ease, transform 260ms ease, visibility 0s linear 260ms;
+  }
+
+  .landing-mobile-menu.is-open {
+    max-height: 28rem;
+    padding: 0.35rem 0 1.25rem;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .landing-mobile-menu a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 0.85rem 0.25rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: 'MyriadPro-Semibold', Arial, sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .landing-mobile-menu a:hover,
+  .landing-mobile-menu a:focus-visible,
+  .landing-mobile-menu a.is-active {
+    color: #fff;
+  }
+
+  .landing-mobile-menu a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: -2px;
+  }
+
+  .landing-mobile-menu .landing-mobile-menu-signin {
+    width: fit-content;
+    margin-top: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+
   .landing-main {
-    min-height: auto;
+    align-items: end;
+    min-height: 100vh;
+    min-height: 100svh;
     gap: 3.5rem;
-    padding: 4.5rem 0 2.5rem;
+    padding: 6.25rem 0 3rem;
+  }
+
+  .landing-hero {
+    transform: none;
+    margin-top: 0;
   }
 
   .landing-title {
-    font-size: clamp(3rem, 13vw, 4.35rem);
+    font-size: clamp(2.35rem, 10.5vw, 3.35rem);
     line-height: 0.98;
     letter-spacing: 0.01em;
   }
 
   .landing-description {
     max-width: 28rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
   .landing-club-note {
     display: grid;
     gap: 0.5rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    font-size: 0.66rem;
   }
 
   .landing-club-note span + span {
@@ -731,7 +837,7 @@
   }
 
   .landing-story-intro h2 {
-    font-size: clamp(3.25rem, 16vw, 4.75rem);
+    font-size: clamp(2.6rem, 13vw, 3.5rem);
   }
 
   .landing-story-slideshow {
